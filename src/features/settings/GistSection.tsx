@@ -1,5 +1,13 @@
 import { useState } from 'react'
-import { ChevronDown, CloudDownload, CloudUpload, Eye, EyeOff } from 'lucide-react'
+import {
+  ChevronDown,
+  CloudDownload,
+  CloudUpload,
+  Eye,
+  EyeOff,
+  HelpCircle,
+  ExternalLink,
+} from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
 import { Field, Input } from '@/components/ui/Field'
@@ -9,9 +17,12 @@ import { loadBackupFromGist, saveBackupToGist } from '@/lib/gist'
 import { cn } from '@/lib/cn'
 import { useApp } from '@/store/useApp'
 
+const TOKEN_URL = 'https://github.com/settings/tokens/new?scopes=gist&description=Sweet%20Calc'
+
 export function GistSection() {
   const { settings, updateSettings, notify, reload } = useApp()
   const [open, setOpen] = useState(false)
+  const [helpOpen, setHelpOpen] = useState(false)
   const [token, setToken] = useState(settings.gistToken)
   const [gistId, setGistId] = useState(settings.gistId)
   const [showToken, setShowToken] = useState(false)
@@ -70,11 +81,11 @@ export function GistSection() {
         type="button"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="tap-none flex items-center justify-between rounded-field bg-surface-2 px-3 py-2.5 text-left"
+        className="tap-none flex items-center justify-between gap-2 rounded-field bg-surface-2 px-3 py-2.5 text-left"
       >
-        <span>
+        <span className="min-w-0">
           <span className="block text-sm font-medium text-ink">Облако (GitHub Gist)</span>
-          <span className="block text-[11px] text-muted">
+          <span className="block truncate text-[11px] text-muted">
             {settings.lastSyncAt
               ? `Последняя синхронизация: ${formatDateTime(settings.lastSyncAt)}`
               : 'Не синхронизировалось'}
@@ -88,9 +99,60 @@ export function GistSection() {
 
       {open ? (
         <div className="flex flex-col gap-3 rounded-field border border-line p-3">
+          <button
+            type="button"
+            onClick={() => setHelpOpen((prev) => !prev)}
+            aria-expanded={helpOpen}
+            className="tap-none flex items-center gap-1.5 self-start rounded-full bg-accent-soft px-3 py-1.5 text-xs font-medium text-accent"
+          >
+            <HelpCircle size={14} />
+            Как получить токен
+            <ChevronDown
+              size={14}
+              className={cn('transition-transform', helpOpen && 'rotate-180')}
+            />
+          </button>
+
+          {helpOpen ? (
+            <div className="flex flex-col gap-2 rounded-field bg-surface-2 p-3 text-xs leading-relaxed text-muted">
+              <p className="font-medium text-ink">Токен нужен один раз — дальше он хранится в браузере.</p>
+              <ol className="flex list-decimal flex-col gap-1.5 pl-4">
+                <li>
+                  Откройте страницу создания токена:{' '}
+                  <a
+                    href={TOKEN_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 font-medium text-accent underline decoration-accent/40 underline-offset-2"
+                  >
+                    github.com/settings/tokens/new
+                    <ExternalLink size={12} />
+                  </a>
+                  . Ссылка уже открывает форму с отмеченным правом <b>gist</b>.
+                </li>
+                <li>
+                  Если открываете вручную: GitHub → Settings → Developer settings →
+                  Personal access tokens → <b>Tokens (classic)</b> → Generate new token.
+                </li>
+                <li>
+                  Отметьте единственное право <b>gist</b>, задайте срок действия и нажмите
+                  «Generate token».
+                </li>
+                <li>
+                  Скопируйте токен (он показывается один раз) и вставьте его в поле ниже.
+                  Поле <b>Gist ID</b> оставьте пустым — приложение создаст Gist само.
+                </li>
+              </ol>
+              <p>
+                Токен хранится только в этом браузере (IndexedDB), не попадает в код, журналы и
+                файл резервной копии. Отозвать его можно на той же странице GitHub.
+              </p>
+            </div>
+          ) : null}
+
           <Field
             label="Personal Access Token"
-            hint="Токен с правом gist. Хранится только в этом браузере."
+            hint="Право gist. Хранится только в этом браузере."
           >
             <div className="relative">
               <Input

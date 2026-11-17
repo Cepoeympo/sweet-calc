@@ -38,30 +38,33 @@ export function RecipeView({
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2.5">
         <button
           type="button"
           onClick={onBack}
           aria-label="Назад к продукции"
-          className="tap-none flex h-9 w-9 items-center justify-center rounded-full bg-surface-2 text-ink"
+          className="tap-none flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-2 text-ink"
         >
           <ArrowLeft size={18} />
         </button>
-        <h1 className="flex-1 truncate text-lg font-semibold text-ink">{recipe.name}</h1>
+        <div className="h-12 w-12 shrink-0 overflow-hidden rounded-field bg-surface-2">
+          <RecipeImage image={recipe.image} alt={recipe.name} />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h1 className="truncate text-base font-semibold leading-tight text-ink">{recipe.name}</h1>
+          <p className="mt-0.5 text-[11px] text-muted">
+            {formatWeight(recipe.finalWeight)}
+            {recipe.finalPieces ? ` · ${formatNumber(recipe.finalPieces, 0)} шт` : ''}
+          </p>
+        </div>
         <button
           type="button"
           onClick={onEdit}
           aria-label="Редактировать"
-          className="tap-none flex h-9 w-9 items-center justify-center rounded-full bg-surface-2 text-ink"
+          className="tap-none flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-surface-2 text-ink"
         >
           <Pencil size={17} />
         </button>
-      </div>
-
-      <div className="overflow-hidden rounded-card bg-surface-2">
-        <div className="aspect-[4/3] w-full">
-          <RecipeImage image={recipe.image} alt={recipe.name} />
-        </div>
       </div>
 
       <div className="grid grid-cols-3 gap-2">

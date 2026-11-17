@@ -66,7 +66,9 @@ export function Modal({
         </header>
         <div className="flex-1 overflow-y-auto px-4 py-4">{children}</div>
         {footer ? (
-          <div className="safe-bottom border-t border-line bg-surface px-4 py-3">{footer}</div>
+          <div className="shrink-0 border-t border-line bg-surface px-4 pb-[calc(12px_+_env(safe-area-inset-bottom,0px))] pt-3">
+            {footer}
+          </div>
         ) : null}
       </div>
     </div>,
