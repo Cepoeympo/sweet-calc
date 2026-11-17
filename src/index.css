@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────  Темы  ───────────────────────────── */
+:root {
+  /* Светлая тема: молочный фон, белые карточки, тёплый графит для текста */
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --surface-2: #f4efea;
+  --border: #e8e0d9;
+  --text: #2b2523;
+  --muted: #7c736c;
+  --success: #4e8b63;
+  --danger: #bf4a44;
+
+  /* Акцент по умолчанию — «Ягодно-пудровый». Переопределяется из настроек */
+  --accent: #c85a72;
+  --accent-soft: rgba(200, 90, 114, 0.14);
+  --accent-foreground: #ffffff;
+}
+
+.dark {
+  /* Тёмная тема: глубокий тёплый графит */
+  --bg: #181617;
+  --surface: #242122;
+  --surface-2: #2e2a2b;
+  --border: #3a3435;
+  --text: #f4f0ed;
+  --muted: #a79e99;
+  --success: #6fae86;
+  --danger: #e0796f;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background-color: var(--accent-soft);
+}
+
+/* Защита от автозума iOS: поля ввода не меньше 16px */
+input,
+textarea,
+select {
+  font-size: 16px;
+  color: inherit;
+  font-family: inherit;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Скрытый скроллбар для горизонтальных списков */
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .tap-none {
+    touch-action: manipulation;
+  }
+}

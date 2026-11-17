@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Мармеладные кубики">
+  <defs>
+    <linearGradient id="mc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdeacb" />
+      <stop offset="1" stop-color="#f0be7a" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#mc-bg)" />
+  <rect x="146" y="214" width="120" height="120" rx="26" fill="#e8883f" transform="rotate(-8 206 274)" />
+  <rect x="146" y="214" width="120" height="120" rx="26" fill="#f8a960" opacity="0.45" transform="rotate(-8 206 274)" />
+  <rect x="252" y="168" width="126" height="126" rx="28" fill="#f29a4d" transform="rotate(7 315 231)" />
+  <rect x="264" y="180" width="102" height="44" rx="22" fill="#ffc38a" opacity="0.65" transform="rotate(7 315 231)" />
+  <rect x="278" y="304" width="112" height="112" rx="24" fill="#d97532" transform="rotate(-5 334 360)" />
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="196" cy="252" r="4" />
+    <circle cx="228" cy="296" r="3" />
+    <circle cx="292" cy="206" r="4" />
+    <circle cx="316" cy="252" r="3" />
+    <circle cx="316" cy="346" r="4" />
+    <circle cx="352" cy="382" r="3" />
+  </g>
+</svg>

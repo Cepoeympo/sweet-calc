@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Птичье молоко">
+  <defs>
+    <linearGradient id="bm-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7e7d2" />
+      <stop offset="1" stop-color="#d8a87c" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bm-bg)" />
+  <rect x="126" y="170" width="260" height="196" rx="26" fill="#fffaf3" />
+  <path d="M152 170h208a26 26 0 0 1 26 26v30H126v-30a26 26 0 0 1 26-26Z" fill="#6b4436" />
+  <rect x="126" y="300" width="260" height="66" fill="#f4dfc9" />
+  <path d="M126 322h260" stroke="#e2c7ab" stroke-width="6" />
+  <rect x="126" y="252" width="260" height="10" fill="#efe0cd" opacity="0.8" />
+  <g fill="#c98f61" opacity="0.8">
+    <circle cx="166" cy="200" r="5" />
+    <circle cx="214" cy="200" r="5" />
+    <circle cx="342" cy="200" r="5" />
+    <circle cx="390" cy="200" r="5" />
+  </g>
+  <circle cx="420" cy="400" r="9" fill="#ffffff" opacity="0.5" />
+  <circle cx="96" cy="126" r="6" fill="#ffffff" opacity="0.5" />
+</svg>
