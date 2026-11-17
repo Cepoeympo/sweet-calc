@@ -56,11 +56,13 @@
 - GitHub Pages: https://cepoeympo.github.io/sweet-calc/ — источник «GitHub Actions»
   (`build_type: workflow`), публикация автоматически при пуше в `main`.
 - Прогоны workflow `Deploy Sweet Calc to GitHub Pages`: 1.0.1 — build 1m55s + deploy 14s;
-  1.0.2 — build 41s + deploy 10s. Оба успешны.
-- Проверено по HTTPS: `index.html`, JS-бандл сборки 1.0.2, CSS, `manifest.webmanifest`
+  1.0.2 — build 41s + deploy 10s; 1.0.3 — build 56s + deploy 9s. Все успешны.
+- Проверено по HTTPS: `index.html`, JS-бандл актуальной сборки, CSS, `manifest.webmanifest`
   (`application/manifest+json`), `sw.js`, иконки — все 200; ассеты с префиксом `/sweet-calc/`.
-- В 1.0.2: инструкция по токену внутри блока Gist, исправлены отступы кнопок в модальных окнах,
+- 1.0.2: инструкция по токену внутри блока Gist, исправлены отступы кнопок в модальных окнах,
   фото рецепта уменьшено до миниатюры 48×48 в шапке карточки.
+- 1.0.3: из карточки рецепта убрана дублирующая текстовая строка КБЖУ и повтор веса партии
+  в шапке; в блоке «КБЖУ на 100 г» показывается вес одной штуки.
 
 ## Следующий шаг
 
