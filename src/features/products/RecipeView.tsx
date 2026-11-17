@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { ArrowLeft, ChefHat, Copy, Pencil, Trash2 } from 'lucide-react'
-import { NutritionGrid, NutritionInline } from '@/components/NutritionBlocks'
+import { NutritionGrid } from '@/components/NutritionBlocks'
 import { RecipeImage } from '@/components/RecipeImage'
 import { Button } from '@/components/ui/Button'
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog'
@@ -9,7 +9,7 @@ import { Segmented } from '@/components/ui/Segmented'
 import { calculateRecipeCost } from '@/lib/calc'
 import { formatMoney, formatNumber, formatWeight, parseDecimal, toInputValue } from '@/lib/format'
 import { calculateNutritionPer100g } from '@/lib/nutrition'
-import { scaleRecipe, type ScaleMode } from '@/lib/scale'
+import { scaleRecipe, weightPerPiece, type ScaleMode } from '@/lib/scale'
 import { useApp } from '@/store/useApp'
 import type { Recipe } from '@/types'
 
@@ -35,6 +35,7 @@ export function RecipeView({
     () => scaleRecipe(recipe, stockMap, mode, parseDecimal(target)),
     [recipe, stockMap, mode, target],
   )
+  const pieceWeight = weightPerPiece(recipe)
 
   return (
     <div className="flex flex-col gap-4">
@@ -53,8 +54,9 @@ export function RecipeView({
         <div className="min-w-0 flex-1">
           <h1 className="truncate text-base font-semibold leading-tight text-ink">{recipe.name}</h1>
           <p className="mt-0.5 text-[11px] text-muted">
-            {formatWeight(recipe.finalWeight)}
-            {recipe.finalPieces ? ` · ${formatNumber(recipe.finalPieces, 0)} шт` : ''}
+            {recipe.finalPieces
+              ? `Выход: ${formatNumber(recipe.finalPieces, 0)} шт`
+              : 'Расчёт по весу'}
           </p>
         </div>
         <button
@@ -88,7 +90,7 @@ export function RecipeView({
         <div className="mb-2 flex items-center justify-between">
           <h2 className="text-sm font-semibold text-ink">КБЖУ на 100 г</h2>
           <span className="text-xs text-muted">
-            {recipe.finalPieces ? `${formatNumber(recipe.finalPieces, 0)} шт в партии` : 'по весу'}
+            {pieceWeight ? `≈ ${formatNumber(pieceWeight, 0)} г / шт` : 'по весу'}
           </span>
         </div>
         <NutritionGrid totals={nutrition} caption="С учётом фактического веса партии (уварка, усушка)" />
@@ -196,7 +198,6 @@ export function RecipeView({
         <Button variant="danger" onClick={() => setConfirmDelete(true)}>
           <Trash2 size={17} /> Удалить рецепт
         </Button>
-        <NutritionInline totals={nutrition} />
       </div>
 
       <ConfirmDialog
