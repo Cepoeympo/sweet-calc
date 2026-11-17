@@ -51,6 +51,8 @@ npm run dev      # http://localhost:5173/sweet-calc/
    lint → typecheck → тесты → сборка → публикация.
 
 Итоговый адрес: `https://<username>.github.io/sweet-calc/`.
+Текущий деплой: **https://cepoeympo.github.io/sweet-calc/** (репозиторий
+[github.com/Cepoeympo/sweet-calc](https://github.com/Cepoeympo/sweet-calc)).
 
 > `base`-путь `/sweet-calc/` зашит в [`vite.config.ts`](vite.config.ts:11). При переименовании
 > репозитория его нужно поменять там же и в манифесте.
